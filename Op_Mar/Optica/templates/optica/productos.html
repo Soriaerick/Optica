@@ -1,0 +1,37 @@
+{% extends 'optica/base.html' %}
+
+{% block content %}
+<div class="header">
+    <h1>Nuestros Productos</h1>
+    <p>Descubre nuestra amplia gama de lentes y accesorios</p>
+</div>
+
+<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+    <h3>Filtrar por categoría:</h3>
+    <div>
+        <a href="{% url 'productos' %}" class="btn" style="margin: 5px;">Todos</a>
+        {% for categoria in categorias %}
+        <a href="{% url 'productos' %}?categoria={{ categoria.nombre }}" class="btn" style="margin: 5px;">
+            {{ categoria.nombre }}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="productos-grid">
+    {% for producto in productos %}
+    <div class="producto-card">
+        {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-imagen">
+        {% endif %}
+        <h3 class="producto-nombre">{{ producto.nombre }}</h3>
+        <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+        <p class="producto-precio">${{ producto.precio }}</p>
+        <p>{{ producto.descripcion|truncatewords:15 }}</p>
+        <a href="{% url 'detalle_producto' producto.id %}" class="btn">Ver Detalles</a>
+    </div>
+    {% empty %}
+    <p>No hay productos disponibles en esta categoría.</p>
+    {% endfor %}
+</div>
+{% endblock %}

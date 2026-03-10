@@ -1,0 +1,27 @@
+    {% extends 'optica/base.html' %}
+
+{% block content %}
+<div class="header">
+    <h1>{{ producto.nombre }}</h1>
+    <a href="{% url 'productos' %}" class="btn">← Volver a productos</a>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <div>
+        {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" style="width: 100%; border-radius: 10px;">
+        {% endif %}
+    </div>
+    <div>
+        <h2>Detalles del Producto</h2>
+        <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+        <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+        <p><strong>Stock disponible:</strong> {{ producto.stock }}</p>
+        
+        <h3>Descripción</h3>
+        <p>{{ producto.descripcion }}</p>
+        
+        <button class="btn" style="background: #27ae60;">🛒 Agregar al carrito</button>
+    </div>
+</div>
+{% endblock %}

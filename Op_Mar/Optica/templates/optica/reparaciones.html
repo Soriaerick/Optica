@@ -1,0 +1,26 @@
+{% extends 'optica/base.html' %}
+
+{% block content %}
+<div class="header">
+    <h1>Servicios de Reparación</h1>
+    <p>Reparamos y ajustamos tus lentes con los mejores estándares de calidad</p>
+</div>
+
+<div class="productos-grid">
+    {% for servicio in servicios %}
+    <div class="producto-card">
+        <h3 class="producto-nombre">{{ servicio.tipo_reparacion }}</h3>
+        <p><strong>Tiempo estimado:</strong> {{ servicio.tiempo_estimado }}</p>
+        <p><strong>Precio estimado:</strong> ${{ servicio.precio_estimado }}</p>
+        <p>{{ servicio.descripcion }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+    <h3>📞 Contáctanos para reparaciones</h3>
+    <h3>tel: 5549445976</h3>
+    <h3>tel: 5529932077</h3>
+    <p>Trae tus lentes para una evaluación gratuita y cotización exacta.</p>
+</div>
+{% endblock %}

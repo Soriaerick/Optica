@@ -1,0 +1,26 @@
+{% extends 'optica/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    <h1>Bienvenido</h1>
+    <p>Encuentra los mejores lentes y servicios para el cuidado de tu vista</p>
+</div>
+
+<section>
+    <h2>Productos Destacados</h2>
+    <div class="productos-grid">
+        {% for producto in productos_destacados %}
+        <div class="producto-card">
+            {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-imagen">
+            {% endif %}
+            <h3 class="producto-nombre">{{ producto.nombre }}</h3>
+            <p class="producto-precio">${{ producto.precio }}</p>
+            <p>{{ producto.descripcion|truncatewords:20 }}</p>
+            <a href="{% url 'detalle_producto' producto.id %}" class="btn">Ver Detalles</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
