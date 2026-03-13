@@ -1,6 +1,6 @@
 nano README.md
 
-## 🛠️ Guía Rápida para el Equipo de Desarrollo (Development Team)
+## Guía Rápida para el Equipo de Desarrollo
 
 Para evitar conflictos en el código y trabajar de forma ordenada en este Sprint, sigan estos pasos todos los días:
 
@@ -13,7 +13,7 @@ Abre tu terminal en WSL (Ubuntu) y escribe:
 Asegúrate de tener Docker Desktop abierto y ejecuta:
 `docker compose up --build`
 
-### 3. El Ciclo de Trabajo Diario (¡IMPORTANTE!)
+### 3. El Ciclo de Trabajo Diario... "¡IMPORTANTE!"
 Cada vez que te sientes a programar, sigue este orden exacto:
 
 1. **Actualizar tu código antes de empezar:**
