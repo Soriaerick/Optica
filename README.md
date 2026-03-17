@@ -13,6 +13,8 @@ Abre tu terminal en WSL (Ubuntu) y escribe:
 Asegúrate de tener Docker Desktop abierto y ejecuta:
 `docker compose up --build`
 
+Paral servidor está levantado correctamente, abre tu navegador web y entra a: http://localhost:8000
+
 ### 3. El Ciclo de Trabajo Diario... "¡IMPORTANTE!"
 Cada vez que te sientes a programar, sigue este orden exacto:
 
