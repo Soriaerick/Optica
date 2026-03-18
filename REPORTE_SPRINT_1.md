@@ -23,3 +23,5 @@ Este sprint no solo consistió en escribir código, sino en adaptar nuestro fluj
     lo cual presentó retos iniciales de configuración, pero nos asegura que el proyecto funcione igual en cualquier computadora.
 
 ## Próximos Pasos (Para el Sprint 2)
+continua
+
