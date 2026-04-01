@@ -8,20 +8,28 @@
 
 ## Sprint Planning (Planificación del Sprint).
 Las dos primeras semanas fueron los siguientes roles asignadas en el equipo.
+
 Aaron Jefe Product Owner
+
 Erick Subjefe Scrum Master
+
 Daniel Programador Development Team
+
 Fernando Programador Development Team
+
 María Programador Development Team
 
 Las reuniones se llevarán a cabo los martes, miércoles y jueves de una hora y media.
 Se realizan los cambios de roles el día 3 de marzo al 5 de marzo y quedaron de la siguiente manera.
 
 Aaron Programador. Development Team
+
 Daniel Programador. Development Team
+
 Fernando Programador. Development Team
 
 Erick Subjefe. Scrum Master
+
 María Jefe. Product Owner
 
 
