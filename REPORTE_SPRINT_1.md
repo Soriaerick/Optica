@@ -1,8 +1,18 @@
 # Reporte de Cierre: Sprint 1
 
 **Fecha de Inicio:** 17 de Febrero de 2026
+
 **Fecha de finalización:** 05 de Marzo de 2026
+
 **Estado:** Completado ✅
+
+## Sprint Planning (Planificación del Sprint).
+Las dos primeras semanas fueron los siguientes roles asignadas en el equipo.
+Aaron Jefe Product Owner
+Erick Subjefe Scrum Master
+Daniel Programador Development Team
+Fernando Programador Development Team
+María Programador Development Team
 
 ## Objetivos para Alcanzar (Frontend)
 Durante este primer sprint, nos estaremos enfocamos en estructurar la página principal (`inicio.html`) y mejorar la navegación del sitio (`base.html`). 
@@ -18,7 +28,10 @@ Se actualizara el archivo `PaginaInicio.png`.
   Se actualizara el archivo `PaginaInicio.png`.
   
 ![Captura de Optica]![](./img/Productos.png)
-* **Promociones del Mes:** Se agregó un banner visualmente distintivo para comunicar las promociones vigentes (ej. 2x1 y exámenes gratis).
+* **Promociones del Mes:** Se agregara un banner visualmente distintivo para comunicar las promociones vigentes (ej. 2x1 y exámenes gratis).
+    Se actualizara el archivo `PaginaInicio.png`.
+  
+![Captura de Optica]![](./img/Servivios.png)
 * **Horarios de Atención:** Se integrara un bloque informativo claro con los días y horas de servicio de la óptica, por el momento asi se encuentra actualmente la página antes de iniciar los cambios correspondientes.
 Se actualizara el archivo `PaginaServicios.png`.
   
