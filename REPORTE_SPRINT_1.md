@@ -20,7 +20,7 @@ Fernando Programador Development Team
 María Programador Development Team
 
 Las reuniones se llevarán a cabo los martes, miércoles y jueves de una hora y media.
-Se realizan los cambios de roles el día 3 de marzo al 5 de marzo y quedaron de la siguiente manera.
+Se realizaran los cambios de roles el día 3 de marzo al 5 de marzo y quedaron de la siguiente manera.
 
 Aaron Programador. Development Team
 
