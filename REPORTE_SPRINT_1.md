@@ -10,7 +10,7 @@ Se completaron las siguientes tareas:
 * **Rediseño de Navegación:** Se reemplazó el menú lateral por un menú superior estático (`sticky`) para modernizar la interfaz y aprovechar el ancho de la pantalla.
 Se actualizara el archivo `PaginaInicio.png`.
   
-![Captura de la navegación](./img/navegacion.png)
+![Captura de Optica]![](./img/PaginaInicio.png)
 * **Carrusel Dinámico:** Se implementó un carrusel de imágenes responsivo en la página de inicio, controlado con JavaScript puro y CSS.
 * **Sección de Ofertas:** Se reutilizaron los estilos de tarjetas de productos para destacar artículos con descuento.
 * **Promociones del Mes:** Se agregó un banner visualmente distintivo para comunicar las promociones vigentes (ej. 2x1 y exámenes gratis).
