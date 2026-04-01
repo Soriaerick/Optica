@@ -4,19 +4,25 @@
 **Fecha de finalización:** 05 de Marzo de 2026
 **Estado:** Completado ✅
 
-## Objetivos Alcanzados (Frontend)
+## Objetivos para Alcanzar (Frontend)
 Durante este primer sprint, nos estaremos enfocamos en estructurar la página principal (`inicio.html`) y mejorar la navegación del sitio (`base.html`). 
 Se completaron las siguientes tareas:
 
-* **Rediseño de Página Principal:**Se inició la transición del menú lateral hacia un menú superior estático. Este cambio busca modernizar la interfaz y optimizar el aprovechamiento del ancho de banda visual en pantalla. A continuación, se visualiza el estado actual de la página principal antes de las modificaciones mayores del Sprint 2.
+* **Rediseño de Página Principal:** * Se inició la transición del menú lateral hacia un menú superior estático. Este cambio busca modernizar la interfaz y optimizar el aprovechamiento del ancho de banda visual en pantalla. A continuación, se visualiza el estado actual de la página principal antes de las modificaciones mayores del Sprint 2.
 Se actualizara el archivo `PaginaInicio.png`.
   
 ![Captura de Optica]![](./img/PaginaInicio.png)
 * **Carrusel Dinámico:** Se implementó un carrusel de imágenes responsivo en la página de inicio, controlado con JavaScript puro y CSS.
+  
 * **Sección de Ofertas:** Se reutilizaron los estilos de tarjetas de productos para destacar artículos con descuento.
+  Se actualizara el archivo `PaginaInicio.png`.
+  
+![Captura de Optica]![](./img/Productos.png)
 * **Promociones del Mes:** Se agregó un banner visualmente distintivo para comunicar las promociones vigentes (ej. 2x1 y exámenes gratis).
-* **Horarios de Atención:** Se integró un bloque informativo claro con los días y horas de servicio de la óptica.
-
+* **Horarios de Atención:** Se integrara un bloque informativo claro con los días y horas de servicio de la óptica, por el momento asi se encuentra actualmente la página antes de iniciar los cambios correspondientes.
+Se actualizara el archivo `PaginaServicios.png`.
+  
+![Captura de Optica]![](./img/Horarios.png)
 ## Notas Técnicas y Curva de Aprendizaje
 Este sprint no solo consistió en escribir código, sino en adaptar nuestro flujo de trabajo a tecnologías estándar de la industria:
 
@@ -29,3 +35,4 @@ Este sprint no solo consistió en escribir código, sino en adaptar nuestro fluj
 ## Próximos Pasos (Para el Sprint 2)
 
 
+ 
