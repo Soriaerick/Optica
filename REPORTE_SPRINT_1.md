@@ -1,13 +1,14 @@
 # Reporte de Cierre: Sprint 1
 
+**Fecha de Inicio:** 17 de Febrero de 2026
 **Fecha de finalización:** 05 de Marzo de 2026
 **Estado:** Completado ✅
 
 ## Objetivos Alcanzados (Frontend)
-Durante este primer sprint, nos enfocamos en estructurar la página principal (`inicio.html`) y mejorar la navegación del sitio (`base.html`). 
+Durante este primer sprint, nos estaremos enfocamos en estructurar la página principal (`inicio.html`) y mejorar la navegación del sitio (`base.html`). 
 Se completaron las siguientes tareas:
 
-* **Rediseño de Navegación:** Se reemplazó el menú lateral por un menú superior estático (`sticky`) para modernizar la interfaz y aprovechar el ancho de la pantalla.
+* **Rediseño de Página Principal:**Se inició la transición del menú lateral hacia un menú superior estático. Este cambio busca modernizar la interfaz y optimizar el aprovechamiento del ancho de banda visual en pantalla. A continuación, se visualiza el estado actual de la página principal antes de las modificaciones mayores del Sprint 2.
 Se actualizara el archivo `PaginaInicio.png`.
   
 ![Captura de Optica]![](./img/PaginaInicio.png)
