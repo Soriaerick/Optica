@@ -14,6 +14,22 @@ Daniel Programador Development Team
 Fernando Programador Development Team
 María Programador Development Team
 
+Las reuniones se llevarán a cabo los martes, miércoles y jueves de una hora y media.
+Se realizan los cambios de roles el día 3 de marzo al 5 de marzo y quedaron de la siguiente manera.
+
+Aaron Programador. Development Team
+Daniel Programador. Development Team
+Fernando Programador. Development Team
+
+Erick Subjefe. Scrum Master
+María Jefe. Product Owner
+
+
+Sobre la repartición del trabajo quedo pendiente, por lo mismo de los problemas técnicos,
+En las primeras dos se semanas hubo atrasaso en la organización por falta de instalación en los equipos y comunicación para realizar los cambios en la página web.
+
+Por el momento se tiene planeado de la siguiente manera:
+
 ## Objetivos para Alcanzar (Frontend)
 Durante este primer sprint, nos estaremos enfocamos en estructurar la página principal (`inicio.html`) y mejorar la navegación del sitio (`base.html`). 
 Se completaron las siguientes tareas:
