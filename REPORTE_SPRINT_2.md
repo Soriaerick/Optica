@@ -6,12 +6,17 @@
 
 **Estado:** Completado ✅
 
-## Los cambios de Roles segu
-iran siendo los mismos no abra cambios, asi se decidio en el equipo de trabajo.
+## Los cambios de Roles seguiran siendo los mismo
+Ya no abra cambios, asi se decidio en el equipo de trabajo.
+
 Aaron Programador. Development Team.
+
 Daniel Programador. Development Team.
+
 Fernando Programador. Development Team.
+
 Erick Subjefe. Scrum Master.
+
 María Jefe. Product Owner.
 
 ## Se planea continuar con lo aplazado 
