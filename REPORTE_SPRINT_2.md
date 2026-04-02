@@ -1,9 +1,13 @@
 # Reporte de Cierre: Sprint 2
 
-**Fecha de finalización:**  de Marzo de 2026
+**Fecha de finalización:** 3 de Marzo de 2026
+
+**Fecha de Finalizacion:** 5 de Marzo de 2026
+
 **Estado:** Completado ✅
 
-## Los cambios de Roles seguiran siendo los mismos no abra cambios, asi se decidio en el equipo de trabajo.
+## Los cambios de Roles segu
+iran siendo los mismos no abra cambios, asi se decidio en el equipo de trabajo.
 Aaron Programador. Development Team.
 Daniel Programador. Development Team.
 Fernando Programador. Development Team.
