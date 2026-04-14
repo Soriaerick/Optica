@@ -3,12 +3,33 @@
 
 {% block content %}
 
-<div class="header">
-    <h1>Bienvenido</h1>
-    <p>Encuentra los mejores lentes y servicios para el cuidado de tu vista</p>
+<div style="text-align: center; padding: 60px 20px 40px 20px; background-color: white;">
+    <h1 style="font-size: 3rem; font-weight: 800; color: #1a1a1a; margin: 0; letter-spacing: -1px;">
+        Bienvenido a Óptica Marquez
+    </h1>
+    <p style="font-size: 1.2rem; color: #666; margin-top: 10px; font-weight: 300;">
+        Encuentra los mejores lentes y servicios para el cuidado de tu vista
+    </p>
 </div>
 
-{% include 'optica/carrucel.html' %}
+<div style="width: 100%; overflow: hidden; display: flex; justify-content: center;">
+    <img src="{% static 'images/Optica.png' %}" 
+         alt="Promoción Óptica Marquez" 
+         style="width: 85%; height: auto; display: block; border: none; border-radius: 15px; box-shadow: 0px 4px 20px rgba(0,0,0,0.1);">
+</div>
+
+<div class="container" style="margin-top: 60px; padding-bottom: 60px;">
+    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 40px; font-weight: 700;">
+        Nuestras Promociones
+    </h2>
+    {% include 'optica/carrucel.html' %}
+</div>
+
+<style>
+    body {
+        overflow-x: hidden;
+        margin: 0;
+    }
+</style>
 
 {% endblock %}
-{endblock %}
