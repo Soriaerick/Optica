@@ -32,4 +32,22 @@ Cada vez que te sientes a programar, sigue este orden exacto:
 
 5. **Subir los cambios a GitHub:**
    `git push origin main`
-hola
+
+# Clonar proyecto
+git clone ...
+
+# Entrar
+cd Op_Mar
+
+# Crear entorno (si no usan Docker)
+python3 -m venv venv
+source venv/bin/activate
+
+# Instalar dependencias
+pip install -r requirements.txt
+
+# Migraciones
+python manage.py migrate
+
+# Ejecutar
+python manage.py runserver
