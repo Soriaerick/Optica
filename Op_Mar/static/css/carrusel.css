@@ -1,0 +1,35 @@
+/* ===== CARRUSEL ===== */
+#slider {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+#slider figure {
+    display: flex;
+    width: 300%;
+    margin: 0;
+    padding: 0;
+    animation: slider 15s infinite;
+}
+
+#slider img {
+    width: calc(100% / 3);
+    height: 400px;
+    object-fit: cover;
+}
+
+@keyframes slider {
+    0% { transform: translateX(0); }
+    30% { transform: translateX(0); }
+
+    33% { transform: translateX(-33.33%); }
+    63% { transform: translateX(-33.33%); }
+
+    66% { transform: translateX(-66.66%); }
+    96% { transform: translateX(-66.66%); }
+
+    100% { transform: translateX(0); }
+}

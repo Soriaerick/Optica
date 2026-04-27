@@ -7,4 +7,6 @@ urlpatterns = [
     path('reparaciones/', views.reparaciones, name='reparaciones'),
     path('horarios/', views.horarios, name='horarios'),
     path('producto/<int:producto_id>/', views.detalle_producto, name='detalle_producto'),
+    path('venta/', views.realizar_venta, name='venta'), # Nueva ruta para el sistema de ventas
+
 ]

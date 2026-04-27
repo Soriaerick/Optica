@@ -1,37 +1,74 @@
 {% extends 'optica/base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="header">
-    <h1>Nuestros Productos</h1>
-    <p>Descubre nuestra amplia gama de lentes y accesorios</p>
-</div>
 
-<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-    <h3>Filtrar por categoría:</h3>
-    <div>
-        <a href="{% url 'productos' %}" class="btn" style="margin: 5px;">Todos</a>
-        {% for categoria in categorias %}
-        <a href="{% url 'productos' %}?categoria={{ categoria.nombre }}" class="btn" style="margin: 5px;">
+<h2>Catálogo de Productos</h2>
+
+<div style="margin: 20px 0;">
+    <strong>Filtrar por categoría:</strong><br><br>
+
+    <a href="{% url 'productos' %}" class="btn">Todos</a>
+
+    {% for categoria in categorias %}
+        <a href="{% url 'productos' %}?categoria={{ categoria.nombre }}" class="btn">
             {{ categoria.nombre }}
         </a>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="productos-grid">
-    {% for producto in productos %}
-    <div class="producto-card">
-        {% if producto.imagen %}
-        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-imagen">
-        {% endif %}
-        <h3 class="producto-nombre">{{ producto.nombre }}</h3>
-        <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
-        <p class="producto-precio">${{ producto.precio }}</p>
-        <p>{{ producto.descripcion|truncatewords:15 }}</p>
-        <a href="{% url 'detalle_producto' producto.id %}" class="btn">Ver Detalles</a>
-    </div>
-    {% empty %}
-    <p>No hay productos disponibles en esta categoría.</p>
     {% endfor %}
 </div>
+
+<!-- 🔥 FORMULARIO DE VENTA -->
+<form method="POST" action="{% url 'venta' %}">
+    {% csrf_token %}
+
+    <div class="productos-grid">
+        {% for producto in productos %}
+        
+        <div class="producto-card">
+
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" class="producto-imagen">
+            {% else %}
+                <img src="{% static 'images/sin.jpg' %}" class="producto-imagen">
+            {% endif %}
+
+            <h3 class="producto-nombre">{{ producto.nombre }}</h3>
+
+            <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+
+            <p class="producto-precio">${{ producto.precio }}</p>
+
+            <p><strong>Stock:</strong> {{ producto.stock }}</p>
+
+            <p>{{ producto.descripcion|truncatewords:15 }}</p>
+
+            <!-- 🔥 SELECCIONAR PRODUCTO -->
+            <label>
+                <input type="checkbox" name="producto_id" value="{{ producto.id }}">
+                Seleccionar
+            </label>
+
+            <!-- 🔥 CANTIDAD -->
+            <input type="number" name="cantidad" value="1" min="1" max="{{ producto.stock }}">
+
+            <br><br>
+
+            <a href="{% url 'detalle_producto' producto.id %}" class="btn">
+                Ver Detalles
+            </a>
+        </div>
+
+        {% empty %}
+            <p>No hay productos disponibles.</p>
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <!-- BOTÓN FINAL -->
+    <button type="submit" class="btn">
+        🛒 Realizar Venta
+    </button>
+</form>
+
 {% endblock %}

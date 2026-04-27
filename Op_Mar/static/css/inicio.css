@@ -1,0 +1,44 @@
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background-color: white;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* BANNER */
+.banner {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.banner img {
+    width: 85%;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* CONTENIDO */
+.container {
+    margin-top: 60px;
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+.container h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+}

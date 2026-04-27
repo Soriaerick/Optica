@@ -1,0 +1,143 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../images/maxresdefault.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Overlay oscuro */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: -1;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LOGO */
+.logo h1 {
+    color: #3498db;
+}
+
+.logo p {
+    font-size: 0.9em;
+}
+
+/* ===== MENU ===== */
+.menu-superior ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.menu-superior a {
+    text-decoration: none;
+    padding: 10px 15px;
+    color: #2c3e50;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.menu-superior a:hover {
+    background: #3498db;
+    color: white;
+}
+
+.menu-superior a.active {
+    background: #2980b9;
+    color: white;
+}
+
+/* ===== MAIN ===== */
+.main-content {
+    background: rgba(255,255,255,0.95);
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+/* ===== GRID PRODUCTOS ===== */
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 20px;
+}
+
+/* CARD */
+.producto-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* IMAGEN */
+.producto-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* TEXTO */
+.producto-nombre {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.producto-precio {
+    color: #2980b9;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* BOTONES */
+.btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-superior ul {
+        flex-wrap: wrap;
+    }
+}
