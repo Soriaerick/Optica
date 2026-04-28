@@ -1,53 +1,190 @@
 nano README.md
 
-## Guía Rápida para el Equipo de Desarrollo
+# Sistema Óptica - Punto de Venta
 
-Para evitar conflictos en el código y trabajar de forma ordenada en este Sprint, sigan estos pasos todos los días:
+Sistema web desarrollado en Django para la gestión de productos, servicios y ventas en una óptica.
 
-### 1. ¿Cómo descargar el proyecto por primera vez? (Solo una vez)
-Abre tu terminal en WSL (Ubuntu) y escribe:
-`git clone https://github.com/Soriaerick/Optica.git`
-`cd Optica`
+---
 
-### 2. ¿Cómo encender el proyecto?
-Asegúrate de tener Docker Desktop abierto y ejecuta:
-`docker compose up --build`
+# Equipo de Desarrollo
 
-Para el servidor está levantado correctamente, abre tu navegador web y entra a: http://localhost:8000
+* Erick Soria
+* Mari
+* Fernando Herrera
+* Daniel Dominguez
+* Aaron
 
-### 3. El Ciclo de Trabajo Diario... "¡IMPORTANTE!"
-Cada vez que te sientes a programar, sigue este orden exacto:
+---
 
-1. **Actualizar tu código antes de empezar:**
-   `git pull origin main`
-   *(Esto descarga lo que hicieron los demás mientras no estabas).*
+# Tecnologías
 
-2. **Trabaja en VS Code y guarda tus archivos.**
+* Python
+* Django
+* SQLite
+* Docker
+* HTML / CSS
 
-3. **Empacar tus cambios:**
-   `git add .`
+---
 
-4. **Etiquetar lo que hiciste (Ej. "Agregué el carrusel"):**
-   `git commit -m "Describe aquí lo que hiciste"`
+# 📦 Instalación del Proyecto
 
-5. **Subir los cambios a GitHub:**
-   `git push origin main`
+## 1. Clonar repositorio
 
-# Clonar proyecto
-git clone ...
+```bash
+git clone https://github.com/Soriaerick/Optica.git
+cd Optica/Op_Mar
+```
 
-# Entrar
-cd Op_Mar
+---
 
-# Crear entorno (si no usan Docker)
+# USO CON DOCKER (RECOMENDADO)
+
+## 2. Levantar el proyecto
+
+```bash
+docker compose up --build
+```
+
+Abrir en navegador:
+
+```
+http://localhost:8000
+```
+
+---
+
+## Detener contenedores
+
+```bash
+docker compose down
+```
+
+---
+
+## Reconstruir contenedores (cuando hay cambios)
+
+```bash
+docker compose up --build
+```
+
+---
+
+## Aplicar migraciones dentro de Docker
+
+```bash
+docker compose exec web python manage.py migrate
+```
+
+---
+
+## Crear superusuario
+
+```bash
+docker compose exec web python manage.py createsuperuser
+```
+
+---
+
+# USO SIN DOCKER (ALTERNATIVO)
+
+## Crear entorno virtual
+
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
-# Instalar dependencias
+## Instalar dependencias
+
+```bash
 pip install -r requirements.txt
+```
 
-# Migraciones
+## Migraciones
+
+```bash
 python manage.py migrate
+```
 
-# Ejecutar
+## Ejecutar servidor
+
+```bash
 python manage.py runserver
+```
+
+---
+
+# FLUJO DE TRABAJO EN EQUIPO (MUY IMPORTANTE)
+
+## TODOS LOS DÍAS seguir este orden:
+
+### 1. Actualizar proyecto
+
+```bash
+git pull origin main
+```
+
+---
+
+### 2. Trabajar en el código
+
+* Editar archivos en VS Code
+* Guardar cambios
+
+---
+
+### 3. Preparar cambios
+
+```bash
+git add .
+```
+
+---
+
+### 4. Crear commit
+
+```bash
+git commit -m "Descripción clara del cambio"
+```
+
+Ejemplo:
+
+```bash
+git commit -m "Agregado carrusel en página de inicio"
+```
+
+---
+
+### 5. Subir cambios
+
+```bash
+git push origin main
+```
+
+---
+
+# REGLAS DEL EQUIPO
+
+* ❌ No trabajar sin hacer `git pull`
+* ❌ No subir código roto
+* ✔ Hacer commits claros
+* ✔ Probar antes de subir
+
+---
+
+# ESTRUCTURA DEL PROYECTO
+
+```
+Optica/
+│
+├── Op_Mar/                # Proyecto Django
+│   ├── Optica/           # App principal
+│   ├── templates/
+│   ├── static/
+│   ├── db.sqlite3
+│   └── manage.py
+│
+├── docker-compose.yml
+├── Dockerfile
+└── README.md
+```
