@@ -26,7 +26,7 @@ Sistema web desarrollado en Django para la gestión de productos, servicios y ve
 
 ---
 
-# 📦 Instalación del Proyecto
+# Instalación del Proyecto
 
 ## 1. Clonar repositorio
 
