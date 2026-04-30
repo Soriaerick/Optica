@@ -1,0 +1,57 @@
+{% extends 'optica/base.html' %}
+
+{% block content %}
+
+<h1> Reporte de Ventas</h1>
+
+<!-- FILTRO -->
+<form method="GET" style="margin-bottom: 20px;">
+    <label>Desde:</label>
+    <input type="date" name="inicio" value="{{ fecha_inicio }}">
+
+    <label>Hasta:</label>
+    <input type="date" name="fin" value="{{ fecha_fin }}">
+
+    <button type="submit" class="btn">Filtrar</button>
+</form>
+
+<!-- TOTAL -->
+<div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+    <h3>Total vendido: ${{ total_vendido }}</h3>
+</div>
+
+<!-- TABLA -->
+<table style="width:100%; background:white; border-radius:10px;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Detalle</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for venta in ventas %}
+        <tr>
+            <td>{{ venta.id }}</td>
+            <td>{{ venta.usuario.username }}</td>
+            <td>{{ venta.fecha }}</td>
+            <td>${{ venta.total }}</td>
+            <td>
+                <ul>
+                    {% for d in venta.detalles.all %}
+                        <li>{{ d.producto.nombre }} x {{ d.cantidad }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No hay ventas registradas</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

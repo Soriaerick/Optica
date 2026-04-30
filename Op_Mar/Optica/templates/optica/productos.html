@@ -11,13 +11,12 @@
     <a href="{% url 'productos' %}" class="btn">Todos</a>
 
     {% for categoria in categorias %}
-        <a href="{% url 'productos' %}?categoria={{ categoria.nombre }}" class="btn">
+        <a href="{% url 'productos_por_categoria' categoria.id %}" class="btn">
             {{ categoria.nombre }}
         </a>
     {% endfor %}
 </div>
 
-<!-- 🔥 FORMULARIO DE VENTA -->
 <form method="POST" action="{% url 'venta' %}">
     {% csrf_token %}
 
@@ -42,20 +41,25 @@
 
             <p>{{ producto.descripcion|truncatewords:15 }}</p>
 
-            <!-- 🔥 SELECCIONAR PRODUCTO -->
+            <!-- ✔ CHECKBOX CORRECTO -->
             <label>
-                <input type="checkbox" name="producto_id" value="{{ producto.id }}">
+                <input type="checkbox" name="productos" value="{{ producto.id }}">
                 Seleccionar
             </label>
 
-            <!-- 🔥 CANTIDAD -->
-            <input type="number" name="cantidad" value="1" min="1" max="{{ producto.stock }}">
+            <!-- ✔ INPUT DINÁMICO -->
+            <input type="number" 
+                   name="cantidad_{{ producto.id }}" 
+                   value="1" 
+                   min="1" 
+                   max="{{ producto.stock }}">
 
             <br><br>
 
             <a href="{% url 'detalle_producto' producto.id %}" class="btn">
                 Ver Detalles
             </a>
+
         </div>
 
         {% empty %}
@@ -65,7 +69,6 @@
 
     <br>
 
-    <!-- BOTÓN FINAL -->
     <button type="submit" class="btn">
         🛒 Realizar Venta
     </button>

@@ -1,0 +1,41 @@
+{% extends 'optica/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    <a href="{% url 'productos' %}" class="btn" style="margin-bottom: 20px;">
+        ← Volver a Productos
+    </a>
+
+    <h1>{{ categoria.nombre }}</h1>
+    <p>{{ productos|length }} productos disponibles</p>
+</div>
+
+<div class="productos-grid">
+    {% for producto in productos %}
+    <div class="producto-card">
+
+        {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" class="producto-imagen">
+        {% else %}
+        <img src="{% static 'images/sin.jpg' %}" class="producto-imagen">
+        {% endif %}
+
+        <h3 class="producto-nombre">{{ producto.nombre }}</h3>
+
+        <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+
+        <p class="producto-precio">${{ producto.precio }}</p>
+
+        <p>{{ producto.descripcion|truncatewords:15 }}</p>
+
+        <a href="{% url 'detalle_producto' producto.id %}" class="btn">
+            Ver Detalles
+        </a>
+
+    </div>
+    {% empty %}
+    <p>No hay productos disponibles en esta categoría.</p>
+    {% endfor %}
+</div>
+{% endblock %}

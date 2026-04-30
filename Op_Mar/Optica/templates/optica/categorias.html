@@ -1,0 +1,21 @@
+{% extends 'optica/base.html' %}
+
+{% block content %}
+
+<h2>Categorías</h2>
+
+<div class="productos-grid">
+    {% for categoria in categorias %}
+    <div class="producto-card" style="text-align:center;">
+
+        <h3>{{ categoria.nombre }}</h3>
+
+        <a href="{% url 'productos_por_categoria' categoria.id %}" class="btn">
+            Ver productos
+        </a>
+
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

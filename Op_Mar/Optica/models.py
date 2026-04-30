@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # ===== CATEGORIA =====
 class Categoria(models.Model):
     nombre = models.CharField(max_length=100)
@@ -9,12 +10,24 @@ class Categoria(models.Model):
         return self.nombre
 
 
+# ===== SUBCATEGORIA (FALTABA) =====
+class SubCategoria(models.Model):
+    nombre = models.CharField(max_length=100)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.nombre} ({self.categoria.nombre})"
+
+
 # ===== PRODUCTO =====
 class Producto(models.Model):
     nombre = models.CharField(max_length=200)
     descripcion = models.TextField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
+
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE, null=True, blank=True)
+
     imagen = models.ImageField(upload_to='productos/', blank=True, null=True)
     stock = models.IntegerField(default=0)
     destacado = models.BooleanField(default=False)
@@ -63,6 +76,11 @@ class Venta(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def calcular_total(self):
+        total = sum(detalle.subtotal() for detalle in self.detalles.all())
+        self.total = total
+        self.save()
 
     def __str__(self):
         return f"Venta #{self.id} - {self.usuario.username}"
