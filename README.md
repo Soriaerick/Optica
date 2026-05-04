@@ -40,20 +40,20 @@ Para cumplir con los estándares de ingeniería, este proyecto implementa las 8 
    * Contenedorización: Uso de Docker para garantizar que el artefacto sea idéntico en desarrollo y producción.
    * Gestión de Dependencias: Automatizada vía requirements.txt.
 4. Pruebas (Test)
-  * Validación Funcional: Pruebas manuales de flujo de caja, stock y agendamiento de citas antes de cada push.
-  * Integridad: Verificación de migraciones de base de datos en entornos limpios.
+   * Validación Funcional: Pruebas manuales de flujo de caja, stock y agendamiento de citas antes de cada push.
+   * Integridad: Verificación de migraciones de base de datos en entornos limpios.
 5. Lanzamiento (Release)
-  * Versionado: Control de versiones basado en tags de Git (v0.5, v1.0).
-  * Changelog: Registro de cambios disponible en la sección de Sprints.
+   * Versionado: Control de versiones basado en tags de Git (v0.5, v1.0).
+   * Changelog: Registro de cambios disponible en la sección de Sprints.
 6. Despliegue (Deploy)
-  * Infraestructura: Despliegue basado en contenedores mediante docker-compose.
-  * Variables de Entorno: Gestión de secretos y configuraciones de Django (SECRET_KEY, DEBUG).
+   * Infraestructura: Despliegue basado en contenedores mediante docker-compose.
+   * Variables de Entorno: Gestión de secretos y configuraciones de Django (SECRET_KEY, DEBUG).
 7. Operación (Operate)
-  * Persistencia: Gestión de base de datos SQLite con planes de migración a PostgreSQL para escalabilidad.
-  * Mantenimiento: Limpieza periódica de archivos estáticos y optimización de imágenes.
+   * Persistencia: Gestión de base de datos SQLite con planes de migración a PostgreSQL para escalabilidad.
+   * Mantenimiento: Limpieza periódica de archivos estáticos y optimización de imágenes.
 8. Monitorización (Monitor)
-  * Logs: Seguimiento de peticiones y errores mediante la consola de Django y logs de Docker.
-  * Feedback: Análisis de la experiencia de usuario para el reabastecimiento de stock en el catálogo.
+   * Logs: Seguimiento de peticiones y errores mediante la consola de Django y logs de Docker.
+   * Feedback: Análisis de la experiencia de usuario para el reabastecimiento de stock en el catálogo.
 ---
 
 # Instalación del Proyecto
