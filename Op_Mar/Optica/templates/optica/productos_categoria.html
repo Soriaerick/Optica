@@ -2,36 +2,42 @@
 {% load static %}
 
 {% block content %}
-<div class="header">
-    <a href="{% url 'productos' %}" class="btn" style="margin-bottom: 20px;">
-        ← Volver a Productos
+<div class="header" style="margin-bottom: 30px;">
+    <a href="{% url 'productos' %}" class="btn" style="background: #e0e0e0; color: #333; padding: 8px 15px; text-decoration: none; border-radius: 5px; display: inline-block; margin-bottom: 20px;">
+        ← Volver a todos los productos
     </a>
 
-    <h1>{{ categoria.nombre }}</h1>
-    <p>{{ productos|length }} productos disponibles</p>
+    <h1 style="color: #2c3e50;">Categoría: {{ categoria.nombre }}</h1>
+    <p style="color: #7f8c8d;">{{ productos|length }} productos disponibles</p>
 </div>
 
 <div class="productos-grid">
     {% for producto in productos %}
-    <div class="producto-card">
+    <div class="producto-card" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
 
         {% if producto.imagen %}
-        <img src="{{ producto.imagen.url }}" class="producto-imagen">
+        <img src="{{ producto.imagen.url }}" class="producto-imagen" style="max-width: 100%; height: auto;">
         {% else %}
-        <img src="{% static 'images/sin.jpg' %}" class="producto-imagen">
+        <img src="{% static 'images/sin.jpg' %}" class="producto-imagen" style="max-width: 100%; height: auto;">
         {% endif %}
 
         <h3 class="producto-nombre">{{ producto.nombre }}</h3>
-
-        <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
-
-        <p class="producto-precio">${{ producto.precio }}</p>
-
+        <p class="producto-precio" style="font-size: 1.2em; color: #27ae60; font-weight: bold;">${{ producto.precio }}</p>
         <p>{{ producto.descripcion|truncatewords:15 }}</p>
 
-        <a href="{% url 'detalle_producto' producto.id %}" class="btn">
-            Ver Detalles
-        </a>
+        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+            <a href="{% url 'detalle_producto' producto.id %}" class="btn" style="background-color: #3498db; color: white; padding: 8px 12px; text-decoration: none; border-radius: 5px;">
+                Ver Detalles
+            </a>
+
+            {% if producto.stock > 0 %}
+                <a href="{% url 'agregar_carrito' producto.id %}" class="btn" style="background-color: #ff9800; color: white; padding: 8px 12px; text-decoration: none; border-radius: 5px;">
+                    🛒 Al Carrito
+                </a>
+            {% else %}
+                <span style="color: red; font-weight: bold; padding: 8px;">Agotado</span>
+            {% endif %}
+        </div>
 
     </div>
     {% empty %}

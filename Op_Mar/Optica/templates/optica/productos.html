@@ -1,77 +1,71 @@
 {% extends 'optica/base.html' %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/productos.css' %}">
+{% endblock %}
+
 {% block content %}
+<h2 class="catalogo-titulo"> Catálogo de Productos</h2>
 
-<h2>Catálogo de Productos</h2>
-
-<div style="margin: 20px 0;">
+<div class="filtros-container">
     <strong>Filtrar por categoría:</strong><br><br>
-
-    <a href="{% url 'productos' %}" class="btn">Todos</a>
-
+    <a href="{% url 'productos' %}" class="btn-filtro">Todos</a>
     {% for categoria in categorias %}
-        <a href="{% url 'productos_por_categoria' categoria.id %}" class="btn">
+        <a href="{% url 'productos_por_categoria' categoria.id %}" class="btn-filtro">
             {{ categoria.nombre }}
         </a>
     {% endfor %}
 </div>
 
-<form method="POST" action="{% url 'venta' %}">
-    {% csrf_token %}
+<div class="productos-grid">
+    {% for producto in productos %}
+    <div class="producto-card">
 
-    <div class="productos-grid">
-        {% for producto in productos %}
-        
-        <div class="producto-card">
+        {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" class="producto-imagen" alt="{{ producto.nombre }}">
+        {% else %}
+            <img src="{% static 'images/sin.jpg' %}" class="producto-imagen" alt="Sin imagen disponible">
+        {% endif %}
 
-            {% if producto.imagen %}
-                <img src="{{ producto.imagen.url }}" class="producto-imagen">
+        <h3 class="producto-nombre">{{ producto.nombre }}</h3>
+        <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+        <p class="producto-precio">$ {{ producto.precio }}</p>
+        <p class="producto-descripcion">{{ producto.descripcion|truncatewords:15 }}</p>
+
+        <div class="stock-container">
+            {% if producto.stock > 5 %}
+                <span class="stock-badge stock-bien">
+                    ✅ En stock: {{ producto.stock }} unidades
+                </span>
+            {% elif producto.stock > 0 %}
+                <span class="stock-badge stock-poco">
+                    ⚠️ ¡Últimas {{ producto.stock }} unidades!
+                </span>
             {% else %}
-                <img src="{% static 'images/sin.jpg' %}" class="producto-imagen">
+                <span class="stock-badge stock-agotado">
+                    ❌ Agotado
+                </span>
             {% endif %}
+        </div>
 
-            <h3 class="producto-nombre">{{ producto.nombre }}</h3>
-
-            <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
-
-            <p class="producto-precio">${{ producto.precio }}</p>
-
-            <p><strong>Stock:</strong> {{ producto.stock }}</p>
-
-            <p>{{ producto.descripcion|truncatewords:15 }}</p>
-
-            <!-- ✔ CHECKBOX CORRECTO -->
-            <label>
-                <input type="checkbox" name="productos" value="{{ producto.id }}">
-                Seleccionar
-            </label>
-
-            <!-- ✔ INPUT DINÁMICO -->
-            <input type="number" 
-                   name="cantidad_{{ producto.id }}" 
-                   value="1" 
-                   min="1" 
-                   max="{{ producto.stock }}">
-
-            <br><br>
-
-            <a href="{% url 'detalle_producto' producto.id %}" class="btn">
+        <div class="botones-container">
+            <a href="{% url 'detalle_producto' producto.id %}" class="btn-detalles">
                 Ver Detalles
             </a>
 
+            {% if producto.stock > 0 %}
+                <a href="{% url 'agregar_carrito' producto.id %}" class="btn-carrito">
+                    🛒 Al Carrito
+                </a>
+            {% else %}
+                <span class="txt-agotado">Agotado</span>
+            {% endif %}
         </div>
 
-        {% empty %}
-            <p>No hay productos disponibles.</p>
-        {% endfor %}
     </div>
-
-    <br>
-
-    <button type="submit" class="btn">
-        🛒 Realizar Venta
-    </button>
-</form>
-
+    {% empty %}
+        <p>No hay productos disponibles en este momento.</p>
+    {% endfor %}
+</div>
 {% endblock %}

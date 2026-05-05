@@ -5,14 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Óptica Marquez</title>
-
-    <!-- CSS GLOBAL -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-    <!-- CSS POR PÁGINA -->
     {% block extra_css %}{% endblock %}
-    
-    <!-- Icono de la página -->
     <link rel="icon" href="{% static 'images/Optica.png' %}">
 </head>
 <body>
@@ -25,42 +19,20 @@
 
     <nav class="menu-superior">
         <ul>
+            <li><a href="{% url 'inicio' %}" class="{% if request.resolver_match.url_name == 'inicio' %}active{% endif %}">Inicio</a></li>
+            <li><a href="{% url 'productos' %}" class="{% if request.resolver_match.url_name == 'productos' %}active{% endif %}">Productos</a></li>
+            <li><a href="{% url 'reparaciones' %}" class="{% if request.resolver_match.url_name == 'reparaciones' %}active{% endif %}">Reparaciones</a></li>
+            <li><a href="{% url 'horarios' %}" class="{% if request.resolver_match.url_name == 'horarios' %}active{% endif %}">Horarios</a></li>
+            <li><a href="{% url 'agendar_cita' %}" class="{% if request.resolver_match.url_name == 'agendar_cita' %}active{% endif %}">Agendar Cita</a></li>
+            
             <li>
-                <a href="{% url 'inicio' %}" 
-                   class="{% if request.resolver_match.url_name == 'inicio' %}active{% endif %}">
-                   Inicio
+                <a href="{% url 'carrito' %}" class="{% if request.resolver_match.url_name == 'carrito' %}active{% endif %}">
+                    🛒 Carrito
                 </a>
             </li>
 
-            <li>
-                <a href="{% url 'productos' %}" 
-                   class="{% if request.resolver_match.url_name == 'productos' %}active{% endif %}">
-                   Productos
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'reparaciones' %}" 
-                   class="{% if request.resolver_match.url_name == 'reparaciones' %}active{% endif %}">
-                   Reparaciones
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'horarios' %}" 
-                   class="{% if request.resolver_match.url_name == 'horarios' %}active{% endif %}">
-                   Horarios
-                </a>
-            </li>
-
-            <!-- 🔥 PROTECCIÓN: solo mostrar si existe la URL -->
             {% if request.user.is_authenticated %}
-            <li>
-                <a href="{% url 'reporte_ventas' %}" 
-                   class="{% if request.resolver_match.url_name == 'reporte_ventas' %}active{% endif %}">
-                   📊 Reporte
-                </a>
-            </li>
+            <li><a href="{% url 'reporte_ventas' %}" class="{% if request.resolver_match.url_name == 'reporte_ventas' %}active{% endif %}">📊 Reporte</a></li>
             {% endif %}
         </ul>
     </nav>

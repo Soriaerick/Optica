@@ -1,0 +1,55 @@
+{% extends 'optica/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="padding: 20px;">
+    <h2 style="border-bottom: 2px solid #333; padding-bottom: 10px;">🛒 Tu Carrito de Compras</h2>
+
+    {% if carrito %}
+        <table class="tabla-carrito" style="width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                <tr>
+                    <th style="padding: 15px; text-align: left;">Producto</th>
+                    <th style="padding: 15px;">Precio</th>
+                    <th style="padding: 15px;">Cantidad</th>
+                    <th style="padding: 15px;">Subtotal</th>
+                    <th style="padding: 15px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto_id, item in carrito.items %}
+                <tr style="border-bottom: 1px solid #eee; text-align: center;">
+                    <td style="padding: 15px; text-align: left;">{{ item.nombre }}</td>
+                    <td>${{ item.precio }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td style="color: #27ae60; font-weight: bold;">${{ item.subtotal }}</td>
+                    <td>
+                        <a href="{% url 'eliminar_carrito' producto_id %}" style="color: #e74c3c; text-decoration: none; font-weight: bold;">❌ Quitar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div style="text-align: right; margin-top: 30px; background: #fdfdfd; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+            <h3 style="margin-bottom: 20px; font-size: 1.5em;">Total a pagar: <span style="color: #27ae60;">${{ total }}</span></h3>
+            
+            <form action="{% url 'confirmar_compra' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn-venta" style="background-color: #28a745; color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 18px; font-weight: bold;">
+                    ✅ Confirmar Compra
+                </button>
+            </form>
+        </div>
+    {% else %}
+        <div style="text-align: center; margin-top: 50px; padding: 40px; background: #f9f9f9; border-radius: 10px;">
+            <h3 style="color: #7f8c8d;">Tu carrito está vacío.</h3>
+            <p>¡Anímate a explorar nuestros armazones!</p>
+            <br>
+            <a href="{% url 'productos' %}" class="btn" style="background-color: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                ⬅ Ver productos
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

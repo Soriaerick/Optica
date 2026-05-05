@@ -1,0 +1,81 @@
+{% extends 'optica/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/agendar_cita.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="cita-container">
+    
+    <div class="cita-form-section">
+        
+        <h2 class="cita-title">🗓️ Agendar una Cita</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="cita-message {% if message.tags == 'error' %}msg-error{% else %}msg-success{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="{% url 'agendar_cita' %}">
+            {% csrf_token %}
+            
+            <div class="cita-form-group">
+                <label class="cita-label">Nombre Completo:</label>
+                <input type="text" name="nombre" class="cita-input" required>
+            </div>
+
+            <div class="cita-form-group">
+                <label class="cita-label">Teléfono:</label>
+                <input type="tel" name="telefono" class="cita-input" required>
+            </div>
+
+            <div class="cita-form-row">
+                <div class="cita-form-group">
+                    <label class="cita-label">Fecha:</label>
+                    <input type="date" name="fecha" class="cita-input" required>
+                </div>
+                
+                <div class="cita-form-group">
+                    <label class="cita-label">Hora:</label>
+                    <input type="time" name="hora" class="cita-input" required>
+                </div>
+            </div>
+
+            <div class="cita-form-group">
+                <label class="cita-label">Motivo de la cita:</label>
+                <select name="motivo" class="cita-input">
+                    <option value="Examen de la vista">Examen de la vista</option>
+                    <option value="Ajuste o reparación">Ajuste o reparación de lentes</option>
+                    <option value="Recoger lentes">Recoger lentes listos</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <button type="submit" class="cita-btn">
+                ✅ Confirmar Cita
+            </button>
+        </form>
+    </div>
+
+    <div class="cita-info-section">
+        <h3 class="cita-info-title">⏱️ Nuestros Horarios</h3>
+        <p class="cita-info-text">Por favor, asegúrate de elegir una hora dentro de estos rangos:</p>
+        
+        <ul class="cita-schedule-list">
+            {% for h in horarios %}
+                <li class="cita-schedule-item">
+                    <strong>{{ h.dia_semana }}:</strong>
+                    <span class="cita-schedule-time">{{ h.horario_apertura|time:"H:i" }} - {{ h.horario_cierre|time:"H:i" }}</span>
+                </li>
+            {% empty %}
+                <li class="cita-schedule-item">Horarios no definidos aún.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+{% endblock %}

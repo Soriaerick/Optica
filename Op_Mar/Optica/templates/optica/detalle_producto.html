@@ -13,15 +13,39 @@
         {% endif %}
     </div>
     <div>
-        <h2>Detalles del Producto</h2>
-        <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+        <h2 style="color: #27ae60; font-weight: bold;">$ {{ producto.precio }}</h2>
         <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
         <p><strong>Stock disponible:</strong> {{ producto.stock }}</p>
-        
-        <h3>Descripción</h3>
         <p>{{ producto.descripcion }}</p>
-        
-        <button class="btn" style="background: #27ae60;">🛒 Agregar al carrito</button>
     </div>
+
+    <div style="margin-top: 20px;">
+        {% if producto.stock > 0 %}
+            <a href="{% url 'agregar_carrito' producto.id %}" class="btn" style="background-color: #ff9800; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">
+                🛒 Agregar al Carrito
+            </a>
+        {% else %}
+            <p style="color: red; font-weight: bold; font-size: 18px;">❌ Producto Agotado</p>
+        {% endif %}
+        
+        <a href="{% url 'productos' %}" class="btn" style="margin-left: 10px; padding: 10px 20px; text-decoration: none; border: 1px solid #333; border-radius: 5px; color: #333;">
+            Volver
+        </a>
+    </div>
+
+    <div style="padding: 15px; border-left: 4px solid {% if producto.stock > 0 %}#27ae60{% else %}#e74c3c{% endif %}; background: #f9f9f9; margin: 20px 0;">
+        <h4 style="margin: 0; color: #333;">Disponibilidad en tienda:</h4>
+        {% if producto.stock > 0 %}
+            <p style="margin: 5px 0 0 0; color: #27ae60; font-size: 1.1em;">
+                <strong>{{ producto.stock }}</strong> artículos disponibles listos para entrega.
+            </p>
+        {% else %}
+            <p style="margin: 5px 0 0 0; color: #e74c3c; font-size: 1.1em;">
+                Actualmente no tenemos este producto en existencia. Vuelve a consultar más adelante.
+            </p>
+        {% endif %}
+    </div>
+
+
 </div>
 {% endblock %}

@@ -1,0 +1,136 @@
+/* ========================================= */
+/* ESTILOS PARA LA PANTALLA DE AGENDAR CITA  */
+/* ========================================= */
+
+.cita-container {
+    max-width: 800px;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* --- COLUMNA IZQUIERDA (FORMULARIO) --- */
+.cita-form-section {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cita-title {
+    text-align: center;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- MENSAJES DE ALERTA --- */
+.cita-message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+.msg-error {
+    background-color: #e74c3c;
+}
+.msg-success {
+    background-color: #27ae60;
+}
+
+/* --- CONTROLES DEL FORMULARIO --- */
+.cita-form-group {
+    margin-bottom: 15px;
+    flex: 1;
+}
+
+.cita-form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.cita-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.cita-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Evita que el padding rompa el diseño */
+    font-family: inherit;
+}
+
+.cita-input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.cita-btn {
+    width: 100%;
+    background-color: #27ae60;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.cita-btn:hover {
+    background-color: #219653;
+}
+
+/* --- COLUMNA DERECHA (HORARIOS) --- */
+.cita-info-section {
+    flex: 0.5;
+    min-width: 250px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+.cita-info-title {
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+.cita-info-text {
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+.cita-schedule-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.cita-schedule-item {
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 10px;
+}
+
+.cita-schedule-time {
+    color: #27ae60;
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+}

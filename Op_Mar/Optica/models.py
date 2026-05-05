@@ -97,3 +97,16 @@ class DetalleVenta(models.Model):
 
     def __str__(self):
         return f"{self.producto.nombre} x {self.cantidad}"
+    
+
+# ===== CITAS =====
+class Cita(models.Model):
+    nombre_cliente = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=15)
+    fecha = models.DateField()
+    hora = models.TimeField()
+    motivo = models.CharField(max_length=150, default="Examen de la vista")
+    creada_en = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.fecha} {self.hora} - {self.nombre_cliente}"
