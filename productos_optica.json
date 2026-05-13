@@ -1,0 +1,254 @@
+[
+{
+  "model": "Optica.categoria",
+  "pk": 1,
+  "fields": {
+    "nombre": "Lentes"
+  }
+},
+{
+  "model": "Optica.categoria",
+  "pk": 2,
+  "fields": {
+    "nombre": "Lentes de Contacto"
+  }
+},
+{
+  "model": "Optica.categoria",
+  "pk": 3,
+  "fields": {
+    "nombre": "Accesorios"
+  }
+},
+{
+  "model": "Optica.categoria",
+  "pk": 4,
+  "fields": {
+    "nombre": "Armazones"
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 1,
+  "fields": {
+    "nombre": "Cadena para Lentes",
+    "descripcion": "Cadena decorativa anticaídas. Evita que se pierdan o caigan los lentes. Ajustables",
+    "precio": "90.00",
+    "categoria": 3,
+    "subcategoria": null,
+    "imagen": "productos/Cadena_para_lentes_rZf5wO2.jpg",
+    "stock": 35,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 2,
+  "fields": {
+    "nombre": "Líquido para lentes de contacto",
+    "descripcion": "Solución multipropósito para limpiar, desinfectar y almacenar.",
+    "precio": "180.00",
+    "categoria": 3,
+    "subcategoria": null,
+    "imagen": "productos/Liquido_para_lentes_HbjmIod.jpeg",
+    "stock": 40,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 3,
+  "fields": {
+    "nombre": "Estuche Rígido Metálico",
+    "descripcion": "Estuche protector de aluminio. Resistente a golpes y caídas.\r\nTamaño universal.",
+    "precio": "120.00",
+    "categoria": 3,
+    "subcategoria": null,
+    "imagen": "productos/Estuche_metalica_qQjnYZB.jpeg",
+    "stock": 60,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 4,
+  "fields": {
+    "nombre": "Kit de Limpieza Premium",
+    "descripcion": "Incluye 3 paños de microfibra y limpiador especial para lentes (sin alcohol).",
+    "precio": "150.00",
+    "categoria": 3,
+    "subcategoria": null,
+    "imagen": "productos/Kit_de_limpieza_0t4iqf5.jpeg",
+    "stock": 50,
+    "destacado": true
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 5,
+  "fields": {
+    "nombre": "Armazón TR90 Deportivo",
+    "descripcion": "Armazón de plástico TR90 resistente a golpes, ideal para hacer deporte y para niños.",
+    "precio": "750.00",
+    "categoria": 4,
+    "subcategoria": null,
+    "imagen": "productos/Armazon_TR30_Deportivo_ZaxmbnX.jpeg",
+    "stock": 25,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 6,
+  "fields": {
+    "nombre": "Armazón Metálico Ultra ligero",
+    "descripcion": "Armazón de acero inoxidable ultraligero con puentes ajustables y plantillas antideslizantes.",
+    "precio": "900.00",
+    "categoria": 4,
+    "subcategoria": null,
+    "imagen": "productos/Armazon_Metal_Ultralight_OHiuGOW.jpeg",
+    "stock": 20,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 7,
+  "fields": {
+    "nombre": "Armazón Acetato Vintage",
+    "descripcion": "Armazón de acetato italiano. Diseño retro en carey, disponible en varios colores.",
+    "precio": "1200.00",
+    "categoria": 4,
+    "subcategoria": null,
+    "imagen": "productos/Armazon_Acetato_Vintage_OKM0O0H.jpeg",
+    "stock": 15,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 8,
+  "fields": {
+    "nombre": "Armazon de Titanio Flex Text",
+    "descripcion": "Armazón de titanio hipoalegénico, super ligero (12g) y flexible.\r\nIdeal para uso diario.",
+    "precio": "1800.00",
+    "categoria": 4,
+    "subcategoria": null,
+    "imagen": "productos/Armazon_Titanium_Flex_jAg5bR9.jpeg",
+    "stock": 12,
+    "destacado": true
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 9,
+  "fields": {
+    "nombre": "Lentes de Contacto Air Optix Aqua",
+    "descripcion": "Lentes mensuales con alta permeabilidad al oxígeno. Sensación de no traer nada puesto.",
+    "precio": "550.00",
+    "categoria": 2,
+    "subcategoria": null,
+    "imagen": "productos/Airo_Optic_DGE1sfE.jpeg",
+    "stock": 45,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 10,
+  "fields": {
+    "nombre": "Lentes de contacto FreshLook Color Avellana",
+    "descripcion": "Lentes de contacto cosméticos que cambian tu color de ojos a un avellana intenso.",
+    "precio": "700.00",
+    "categoria": 2,
+    "subcategoria": null,
+    "imagen": "productos/FreshLook_Color_Avellana_hD5JXct.jpeg",
+    "stock": 40,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 11,
+  "fields": {
+    "nombre": "Lentes de Contacto Biofinity Energys",
+    "descripcion": "Lentes mensuales para personas que usan pantallas, reducen la fatiga visual y mantiene la hidratación.",
+    "precio": "600.00",
+    "categoria": 2,
+    "subcategoria": null,
+    "imagen": "productos/Airo_Optic_DGE1sfE_LtlfLwY.jpeg",
+    "stock": 0,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 12,
+  "fields": {
+    "nombre": "Lentes de Contacto ACUVUE OASYS",
+    "descripcion": "Lentes de contacto desechables de un día.\r\nTecnología HydraLuxe para la hidratación todo el día.\r\n30 pares.",
+    "precio": "850.00",
+    "categoria": 2,
+    "subcategoria": null,
+    "imagen": "productos/LenCon_ACUAVUE_7wQJPP2.jpeg",
+    "stock": 50,
+    "destacado": true
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 13,
+  "fields": {
+    "nombre": "Lentes Gamer",
+    "descripcion": "Lentes para pantalla con filtro del 50% de luz azul. Reduce la fatiga visual en sesiones largas de juego.",
+    "precio": "1200.00",
+    "categoria": 1,
+    "subcategoria": null,
+    "imagen": "productos/Lentes_Gamer_qGmxELm.jpeg",
+    "stock": 20,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 14,
+  "fields": {
+    "nombre": "Lentes  Ray-Ban Aviador Clásico",
+    "descripcion": "Diseño icónico con protección UV400. Montura de metal ligero, lentes de cristal mineral antirreflejante.\r\nPerfectos para uso diario.",
+    "precio": "3200.00",
+    "categoria": 1,
+    "subcategoria": null,
+    "imagen": "productos/Ray-Ban_Aviator_RWGEW6w.jpeg",
+    "stock": 15,
+    "destacado": false
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 15,
+  "fields": {
+    "nombre": "Lentes de forma libre progresiva",
+    "descripcion": "Lentes progresivos sin línea. Visión clara de cerca, intermedia y lejos. Adaptación rápida.",
+    "precio": "3500.00",
+    "categoria": 1,
+    "subcategoria": null,
+    "imagen": "productos/Lentes_libres_progresivos_Fki178Y.jpeg",
+    "stock": 8,
+    "destacado": true
+  }
+},
+{
+  "model": "Optica.producto",
+  "pk": 16,
+  "fields": {
+    "nombre": "Lentes de lectura con filtro azul",
+    "descripcion": "Lentes de lectura con filtro azul. Perfectos para leer en tablet o computadora.",
+    "precio": "450.00",
+    "categoria": 1,
+    "subcategoria": null,
+    "imagen": "productos/Lentes_lectura_Azul_fZ92emT.jpeg",
+    "stock": 35,
+    "destacado": true
+  }
+}
+]
