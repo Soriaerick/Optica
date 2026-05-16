@@ -9,10 +9,10 @@ Sistema web desarrollado en Django para la gestión de productos, servicios y ve
 # Equipo de Desarrollo
 
 * Erick Soria
-* Mari
+* María Hernández
 * Fernando Herrera
 * Daniel Dominguez
-* Aaron
+* Aaron Maldonado
 
 ---
 
