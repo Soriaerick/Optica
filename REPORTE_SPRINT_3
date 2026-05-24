@@ -1,1 +1,22 @@
 
+# REPORTE ESTABILIZACIÓN NÚCLEO - SPRINT 3
+
+## Objetivo cumplimiento esperado
+- Levantar Django + Docker sin errores → **crítico**
+- Cero advertencias en consola → **objetivo secundario obligado**
+
+## Backlog validado
+- [Pendiente] Limpiar duplicados en settings.py (T01)
+- [Pendiente] Estandarizar estructura carpetas (T02)
+- [Pendiente] Smoke test Docker + Django (T03)
+
+## Esfuerzo re-estimado (realista)
+- **Total**: 4–6 horas efectivas (no 5 lineales)
+- Riesgo identificado: archivos huérfanos como `productos_optica.json` pueden romper rutas
+
+## Valor de negocio real
+- El equipo dejará de perder tiempo en “me funciona a mí”
+- Onboarding baja de días a horas
+
+## Próxima acción concreta (modo búsqueda inteligente)
+> Ejecutar `docker-compose up` hoy mismo y capturar el PRIMER error real
