@@ -1,0 +1,618 @@
+# Manual Técnico — Sistema Óptica Márquez
+
+**Versión:** 1.0  
+**Última actualización:** Mayo 2026  
+**Equipo de desarrollo:** Erick Soria, María Hernández, Fernando Herrera, Daniel Dominguez, Aaron Maldonado
+
+---
+
+## 📑 Índice
+
+1. [Introducción](#1-introducción)
+2. [Arquitectura del Sistema](#2-arquitectura-del-sistema)
+3. [Requisitos del Entorno](#3-requisitos-del-entorno)
+4. [Instalación y Configuración](#4-instalación-y-configuración)
+5. [Estructura del Proyecto](#5-estructura-del-proyecto)
+6. [Modelo de Datos](#6-modelo-de-datos)
+7. [Rutas y Vistas](#7-rutas-y-vistas)
+8. [Frontend y Estilos](#8-frontend-y-estilos)
+9. [Carrito de Compras](#9-carrito-de-compras)
+10. [Agendamiento de Citas](#10-agendamiento-de-citas)
+11. [Modelo 3D Interactivo](#11-modelo-3d-interactivo)
+12. [Panel de Administración](#12-panel-de-administración)
+13. [Docker](#13-docker)
+14. [Datos de Prueba](#14-datos-de-prueba)
+15. [Configuración (settings.py)](#15-configuración-settingspy)
+16. [Mantenimiento](#16-mantenimiento)
+17. [Referencias](#17-referencias)
+
+---
+
+## 1. Introducción
+
+**Óptica Márquez** es un sistema web de punto de venta desarrollado en **Django 5.2** que permite la gestión de productos, servicios de reparación, ventas, citas y horarios para una óptica. El proyecto sigue una metodología ágil (Scrum) con ciclo de vida DevOps y está containerizado con Docker para portabilidad entre entornos de desarrollo.
+
+### ✨ Funcionalidades principales
+
+| Módulo | Descripción |
+|--------|-------------|
+| 🛍️ **Catálogo de productos** | Visualización con filtros por categoría, stock, imágenes |
+| 🛒 **Carrito de compras** | Carrito basado en sesión con confirmación de compra |
+| 💰 **Ventas** | Registro de ventas con descuento de stock automático |
+| 📊 **Reporte de ventas** | Panel con filtros por fecha, totales y lista de citas |
+| 📅 **Citas** | Agendamiento con validación de horario laboral |
+| 🔧 **Reparaciones** | Lista de servicios + modelo 3D interactivo de lentes |
+| 🕒 **Horarios** | Horarios de atención con mapa de Google Maps embebido |
+
+---
+
+## 2. Arquitectura del Sistema
+
+```
+Cliente (Navegador)
+       │
+       ▼
+   Django (WSGI)
+       │
+       ▼
+   SQLite (BD)
+```
+
+- **Patrón:** MTV (Model-Template-View) de Django
+- **Backend:** Python 3.11 + Django 5.2
+- **Frontend:** HTML5, CSS3, JavaScript (vanilla + Three.js para 3D)
+- **Base de datos:** SQLite (desarrollo), migrable a PostgreSQL
+- **Infraestructura:** Docker / docker-compose
+- **Servidor HTTP:** Django development server (puerto 8000)
+
+---
+
+## 3. Requisitos del Entorno
+
+### Con Docker (recomendado)
+- Docker Engine 24+
+- Docker Compose v2+
+
+### Sin Docker
+- Python 3.10+
+- pip
+- Entorno virtual (venv)
+
+### Dependencias Python
+
+```
+Django        # Framework web
+gunicorn      # Servidor WSGI (producción)
+Pillow        # Procesamiento de imágenes
+```
+
+### Dependencias Frontend (CDN)
+- Three.js 0.128.0 (modelo 3D interactivo)
+- Google Maps Embed API (mapa embebido)
+
+---
+
+## 4. Instalación y Configuración
+
+### 4.1 Con Docker
+
+```bash
+# Clonar y entrar al directorio
+git clone https://github.com/Soriaerick/Optica.git
+cd Optica
+
+# Construir y levantar contenedores
+docker compose up --build
+
+# Aplicar migraciones
+docker compose exec web python manage.py migrate
+
+# Cargar datos de prueba
+docker compose exec web python manage.py loaddata productos_optica.json
+
+# Crear superusuario (admin)
+docker compose exec web python manage.py createsuperuser
+```
+
+Abrir en navegador: `http://localhost:8000`
+
+### 4.2 Sin Docker
+
+```bash
+cd Op_Mar
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# Linux/Mac
+source venv/bin/activate
+
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py loaddata ../productos_optica.json
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+---
+
+## 5. Estructura del Proyecto
+
+```
+Optica-main/
+│
+├── Op_Mar/                          # Proyecto Django
+│   ├── Op_Mar/                      # Configuración del proyecto
+│   │   ├── settings.py              # Configuración general
+│   │   ├── urls.py                  # URL raíz (admin + include)
+│   │   ├── wsgi.py                  # WSGI entry point
+│   │   └── asgi.py                  # ASGI entry point
+│   │
+│   ├── Optica/                      # App principal
+│   │   ├── models.py                # Modelos de datos (7 modelos)
+│   │   ├── views.py                 # Vistas (14 funciones)
+│   │   ├── urls.py                  # URLs de la app (12 rutas)
+│   │   ├── admin.py                 # Configuración del admin
+│   │   ├── apps.py                  # Configuración de la app
+│   │   ├── tests.py                 # Pruebas
+│   │   ├── migrations/              # Migraciones de BD
+│   │   └── templates/
+│   │       └── optica/              # 11 templates HTML
+│   │
+│   ├── static/
+│   │   ├── css/                     # 6 archivos CSS
+│   │   ├── images/                  # 6 imágenes
+│   │   └── models/                  # 1 modelo 3D (.glb)
+│   │
+│   ├── manage.py                    # CLI de Django
+│   └── requirements.txt             # Dependencias
+│
+├── docker-compose.yml               # Orquestación Docker
+├── Dockerfile                       # Build de la imagen
+├── productos_optica.json            # Datos de prueba (fixture)
+│
+├── PLAN_DE_PROYECTO.md              # Plan de gestión (PMP)
+├── REPORTE_SPRINT_1.md              # Reporte Sprint 1
+├── REPORTE_SPRINT_2.md              # Reporte Sprint 2
+└── README.md                        # Documentación general
+```
+
+---
+
+## 6. Modelo de Datos
+
+### Diagrama de modelos
+
+```
+Categoria ──1:N──> SubCategoria
+    │
+    └──1:N──> Producto
+                │
+                └──1:N──> DetalleVenta ──N:1──> Venta ──N:1──> User
+
+ServicioReparacion (standalone)
+HorarioAtencion (standalone)
+Datos_paciente (standalone)
+Cita (standalone)
+```
+
+### 6.1 Categoria
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | AutoField (PK) | Identificador único |
+| `nombre` | CharField(100) | Nombre de la categoría |
+
+### 6.2 SubCategoria
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | AutoField (PK) | Identificador único |
+| `nombre` | CharField(100) | Nombre de la subcategoría |
+| `categoria` | ForeignKey(Categoria) | Categoría padre |
+
+### 6.3 Producto
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | AutoField (PK) | Identificador único |
+| `nombre` | CharField(200) | Nombre del producto |
+| `descripcion` | TextField | Descripción detallada |
+| `precio` | DecimalField(10,2) | Precio en pesos |
+| `categoria` | ForeignKey(Categoria) | Categoría del producto |
+| `subcategoria` | ForeignKey(SubCategoria) | Subcategoría (nullable) |
+| `imagen` | ImageField | Imagen del producto |
+| `stock` | IntegerField | Cantidad en inventario |
+| `destacado` | BooleanField | Si aparece en promociones |
+
+**Métodos:**
+- `hay_stock(cantidad)` — Verifica si hay suficiente inventario
+
+### 6.4 Venta
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | AutoField (PK) | Identificador único |
+| `usuario` | ForeignKey(User) | Vendedor que realizó la venta |
+| `fecha` | DateTimeField(auto_now_add) | Fecha y hora de la venta |
+| `total` | DecimalField(10,2) | Total calculado |
+
+**Métodos:**
+- `calcular_total()` — Suma los subtotales de los detalles
+
+### 6.5 DetalleVenta
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | AutoField (PK) | Identificador único |
+| `venta` | ForeignKey(Venta, related_name='detalles') | Venta padre |
+| `producto` | ForeignKey(Producto) | Producto vendido |
+| `cantidad` | IntegerField | Cantidad vendida |
+| `precio` | DecimalField(10,2) | Precio unitario al momento de la venta |
+
+**Métodos:**
+- `subtotal()` — Retorna `precio * cantidad`
+
+### 6.6 ServicioReparacion
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | AutoField (PK) | Identificador único |
+| `tipo_reparacion` | CharField(200) | Nombre del servicio |
+| `descripcion` | TextField | Descripción del servicio |
+| `precio_estimado` | DecimalField(10,2) | Costo estimado |
+| `tiempo_estimado` | CharField(50) | Tiempo de reparación |
+
+### 6.7 HorarioAtencion
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | AutoField (PK) | Identificador único |
+| `dia_semana` | CharField(20) | Nombre del día (Lunes, Martes...) |
+| `horario_apertura` | TimeField | Hora de apertura |
+| `horario_cierre` | TimeField | Hora de cierre |
+
+### 6.8 Cita
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | AutoField (PK) | Identificador único |
+| `nombre_cliente` | CharField(100) | Nombre del cliente |
+| `telefono` | CharField(15) | Teléfono de contacto |
+| `fecha` | DateField | Fecha de la cita |
+| `hora` | TimeField | Hora de la cita |
+| `motivo` | CharField(150) | Motivo (default: "Examen de la vista") |
+| `creada_en` | DateTimeField(auto_now_add) | Fecha de registro |
+
+### 6.9 Datos_paciente
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | AutoField (PK) | Identificador único |
+| `nombre_cliente` | CharField(100) | Nombre del paciente |
+| `telefono` | CharField(15) | Teléfono |
+| `fecha` | DateField | Fecha del registro |
+| `servicio` | CharField(50) | Servicio solicitado |
+
+---
+
+## 7. Rutas y Vistas
+
+### 7.1 URLs de la app (Optica/urls.py)
+
+| Ruta | Vista | Nombre | Método HTTP | Login requerido |
+|---|---|---|---|---|
+| `/` | `inicio` | `inicio` | GET | No |
+| `/productos/` | `lista_productos` | `productos` | GET | No |
+| `/producto/<id>/` | `detalle_producto` | `detalle_producto` | GET | No |
+| `/categorias/` | `categorias` | `categorias` | GET | No |
+| `/categoria/<id>/` | `productos_por_categoria` | `productos_por_categoria` | GET | No |
+| `/reparaciones/` | `reparaciones` | `reparaciones` | GET | No |
+| `/horarios/` | `horarios` | `horarios` | GET | No |
+| `/carrito/` | `ver_carrito` | `carrito` | GET | No |
+| `/carrito/agregar/<id>/` | `agregar_carrito` | `agregar_carrito` | GET | No |
+| `/carrito/eliminar/<id>/` | `eliminar_carrito` | `eliminar_carrito` | GET | No |
+| `/carrito/confirmar/` | `confirmar_compra` | `confirmar_compra` | POST | Sí |
+| `/venta/` | `realizar_venta` | `venta` | POST | Sí |
+| `/reporte-ventas/` | `reporte_ventas` | `reporte_ventas` | GET | Sí |
+| `/agendar-cita/` | `agendar_cita` | `agendar_cita` | GET+POST | No |
+| `/admin/` | Admin de Django | — | — | Sí |
+
+### 7.2 Descripción de vistas clave
+
+#### `inicio(request)`
+Renderiza la página principal con hasta 6 productos destacados.
+
+#### `lista_productos(request)`
+Muestra todos los productos. Soporta filtro por categoría vía `GET ?categoria=`.
+
+#### `agregar_carrito(request, producto_id)`
+Agrega un producto al carrito almacenado en `request.session['carrito']`. Si ya existe, incrementa la cantidad.
+
+#### `ver_carrito(request)`
+Limpia y muestra el carrito de compras. Calcula subtotales y total.
+
+#### `confirmar_compra(request)`
+Procesa el pago: crea una `Venta`, itera sobre el carrito, crea `DetalleVenta`, descuenta stock, y vacía el carrito.
+
+#### `reporte_ventas(request)`
+Muestra ventas y citas con filtro por rango de fechas. Calcula el total vendido en el periodo.
+
+#### `agendar_cita(request)`
+Valida que la fecha/hora esté dentro del horario de atención antes de guardar la cita. Usa `messages` de Django para feedback.
+
+---
+
+## 8. Frontend y Estilos
+
+### 8.1 Templates
+
+| Archivo | Extiende | Descripción |
+|---|---|---|
+| `base.html` | — | Layout base con header, menú y main |
+| `inicio.html` | base.html | Página principal con hero, banner y carrusel |
+| `productos.html` | base.html | Catálogo de productos con filtros |
+| `productos_categoria.html` | base.html | Productos filtrados por categoría |
+| `detalle_producto.html` | base.html | Detalle individual del producto |
+| `categorias.html` | base.html | Listado de categorías |
+| `carrito.html` | base.html | Carrito de compras |
+| `reparaciones.html` | base.html | Servicios + modelo 3D interactivo |
+| `horarios.html` | base.html | Horarios + mapa de Google Maps |
+| `agendar_cita.html` | base.html | Formulario de agendamiento |
+| `reporte_ventas.html` | base.html | Panel de reportes (admin) |
+| `carrusel.html` | (parcial) | Carrusel de imágenes incluido en inicio |
+
+### 8.2 Archivos CSS
+
+| Archivo | Propósito |
+|---|---|
+| `styles.css` | Estilos globales: reset, body, header, menú, main, grid base |
+| `inicio.css` | Hero, banner, sección de promociones |
+| `productos.css` | Catálogo: filtros, tarjetas, badges de stock, botones |
+| `carrusel.css` | Animación CSS del carrusel de imágenes |
+| `horarios.css` | Mapa, tarjetas de ubicación, horarios |
+| `agendar_cita.css` | Formulario de citas, columna de horarios |
+
+### 8.3 Menú de navegación
+
+El menú superior (en `base.html`) incluye:
+
+- Inicio
+- Productos
+- Reparaciones
+- Horarios
+- Agendar Cita
+- Carrito
+- Reporte (solo visible para usuarios autenticados)
+
+Las rutas activas se marcan con la clase `active` usando `request.resolver_match.url_name`.
+
+---
+
+## 9. Carrito de Compras
+
+El carrito se implementa completamente en **sesión** (`request.session`) sin persistencia en base de datos.
+
+### Estructura en sesión
+
+```json
+{
+  "carrito": {
+    "1": {
+      "nombre": "Lentes Gamer",
+      "precio": 1200.0,
+      "cantidad": 2,
+      "subtotal": 2400.0
+    },
+    "5": {
+      "nombre": "Armazón TR90",
+      "precio": 750.0,
+      "cantidad": 1,
+      "subtotal": 750.0
+    }
+  }
+}
+```
+
+### Flujo de compra
+
+1. Usuario navega productos → hace clic en "Al Carrito"
+2. `agregar_carrito` agrega/actualiza item en sesión
+3. Usuario va al carrito → revisa items
+4. Usuario hace clic en "Confirmar Compra"
+5. `confirmar_compra` (POST, requiere login):
+   - Crea objeto `Venta` con usuario actual
+   - Itera sobre carrito, crea `DetalleVenta` por cada item
+   - Descuenta stock de cada producto
+   - Calcula y guarda total
+   - Vacía el carrito en sesión
+   - Redirige a productos
+
+---
+
+## 10. Agendamiento de Citas
+
+### Validaciones implementadas
+
+1. **Formato de fecha/hora:** Se parsean con `datetime.strptime`
+2. **Día de la semana:** Se obtiene el día (0=Lunes...6=Domingo) y se busca en `HorarioAtencion`
+3. **Rango horario:** Se verifica que `apertura <= hora <= cierre`
+4. Si alguna validación falla, se muestra mensaje de error con `messages.error()` y se redirige al formulario
+
+### Flujo
+
+1. GET `/agendar-cita/` → Muestra formulario + horarios disponibles
+2. POST `/agendar-cita/` → Valida → Guarda `Cita` → Mensaje éxito → Redirige a inicio
+
+---
+
+## 11. Modelo 3D Interactivo
+
+En la página de reparaciones se incluye un modelo 3D de unos lentes (formato **GLB**) renderizado con **Three.js**.
+
+### Implementación
+
+- **Biblioteca:** Three.js v0.128.0 vía CDN (importmap)
+- **Archivo:** `static/models/fc7d291383a94b48847a71fe9f3fe1ac.glb`
+- **Controles:** OrbitControls (rotar, zoom, pan)
+- **Interacción:** Raycasting para detectar clic en partes del modelo
+
+### Mapa de reparaciones por parte
+
+| ID del objeto 3D | Nombre | Reparaciones |
+|---|---|---|
+| `Object_9` | Lente Izquierdo/Derecho | Cambio de lente, pulido, antirreflejante |
+| `Object_6` | Patilla Izquierda/Derecha | Reemplazo, ajuste de bisagra, rotura |
+| `Object_4` | Armazón Principal/Puente | Reparación estructural, reemplazo, alineación |
+| `almohadilla` | Almohadilla nasal | Cambio, ajuste de altura |
+| `Object_11` | Tornillos | Tornillo de mica, bisagra, patilla |
+| `Object_7` | Bisagra | Embutido, cambio de bisagra |
+
+Al hacer clic en una parte del modelo, se muestra un panel lateral con las reparaciones disponibles y precios estimados.
+
+---
+
+## 12. Panel de Administración
+
+### Acceso
+- URL: `/admin/`
+- Requiere superusuario (crear con `createsuperuser`)
+
+### Modelos registrados
+
+| Modelo | Columnas visibles | Filtros | Búsqueda |
+|---|---|---|---|
+| Categoria | — | — | — |
+| SubCategoria | nombre, categoria | categoria | nombre |
+| Producto | nombre, precio, categoria, subcategoria, stock, destacado | categoria, subcategoria, destacado | nombre |
+| ServicioReparacion | tipo_reparacion, precio_estimado, tiempo_estimado | — | — |
+| HorarioAtencion | dia_semana, horario_apertura, horario_cierre | — | — |
+| Datos_paciente | nombre_cliente, telefono, fecha, servicio | — | — |
+
+---
+
+## 13. Docker
+
+### Dockerfile
+
+```dockerfile
+FROM python:3.11
+WORKDIR /app
+COPY Op_Mar /app
+RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+
+### docker-compose.yml
+
+```yaml
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./Op_Mar:/app
+    command: python manage.py runserver 0.0.0.0:8000
+```
+
+### Comandos útiles
+
+| Comando | Descripción |
+|---|---|
+| `docker compose up --build` | Construir y levantar |
+| `docker compose down` | Detener contenedores |
+| `docker compose exec web python manage.py migrate` | Ejecutar migraciones |
+| `docker compose exec web python manage.py createsuperuser` | Crear admin |
+| `docker compose exec web python manage.py loaddata productos_optica.json` | Cargar datos |
+| `docker compose exec web python manage.py makemigrations` | Crear migraciones |
+
+---
+
+## 14. Datos de Prueba
+
+El archivo `productos_optica.json` es un fixture de Django que contiene datos iniciales.
+
+### Contenido
+
+- **4 categorías:** Lentes, Lentes de Contacto, Accesorios, Armazones
+- **16 productos** con nombres, descripciones, precios, stock, imágenes referenciadas
+
+### Carga
+
+```bash
+python manage.py loaddata productos_optica.json
+```
+
+### Vaciado de BD (reinicio)
+
+```bash
+# Eliminar BD
+rm db.sqlite3
+
+# Recrear y cargar
+python manage.py migrate
+python manage.py loaddata productos_optica.json
+python manage.py createsuperuser
+```
+
+---
+
+## 15. Configuración (settings.py)
+
+| Variable | Valor | Nota |
+|---|---|---|
+| `SECRET_KEY` | Hardcodeada | Mover a variable de entorno en producción |
+| `DEBUG` | `True` | Cambiar a `False` en producción |
+| `ALLOWED_HOSTS` | `[]` | Configurar dominios en producción |
+| `DATABASES` | SQLite | Migrar a PostgreSQL en producción |
+| `MEDIA_URL` | `/media/` | Archivos subidos (imágenes de productos) |
+| `STATIC_URL` | `/static/` | Archivos estáticos |
+
+### Mejores prácticas para producción
+
+1. Mover `SECRET_KEY` a variable de entorno
+2. `DEBUG = False`
+3. Configurar `ALLOWED_HOSTS`
+4. Usar PostgreSQL como base de datos
+5. Servir estáticos con `whitenoise` o nginx
+6. Usar `gunicorn` como servidor WSGI
+7. Configurar `python manage.py collectstatic`
+
+---
+
+## 16. Mantenimiento
+
+### Tareas periódicas
+
+```bash
+# Limpiar archivos estáticos
+python manage.py collectstatic --clear
+
+# Verificar migraciones pendientes
+python manage.py showmigrations
+
+# Hacer backup de la base de datos
+copy db.sqlite3 db_backup_$(date).sqlite3
+```
+
+### Solución de problemas comunes
+
+| Problema | Causa | Solución |
+|---|---|---|
+| `ModuleNotFoundError: No module named 'Pillow'` | Falta dependencia | `pip install Pillow` |
+| Imágenes de productos no cargan | `MEDIA_URL` mal configurado | Verificar `urls.py` incluye `+ static(...)` |
+| Error al migrar | Migraciones desincronizadas | `python manage.py migrate --run-syncdb` |
+| Modelo 3D no carga | Archivo `.glb` no encontrado | Verificar `static/models/fc7d...glb` existe |
+| Carrito se pierde | Sesión expirada | Aumentar `SESSION_COOKIE_AGE` en settings |
+
+---
+
+## 17. Referencias
+
+- [Documentación Django 5.2](https://docs.djangoproject.com/en/5.2/)
+- [Three.js](https://threejs.org/)
+- [Docker](https://docs.docker.com/)
+- Repositorio: `https://github.com/Soriaerick/Optica`
